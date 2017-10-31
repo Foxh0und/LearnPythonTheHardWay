@@ -1,4 +1,4 @@
-from sys import arv
+from sys import argv
 
 script, filename = argv
 
@@ -32,7 +32,10 @@ target.write( "\n" )
 target.write( line3 )
 target.write( "\n" )
 
-print( "And finally we close the file. Let's take a look and see what's inside!" )
+print( "And finally we close the file.")
+target.close()
+
+print( "Let's take a look and see what's inside!" )
 
 file = open( filename )
 print( file.read() )
