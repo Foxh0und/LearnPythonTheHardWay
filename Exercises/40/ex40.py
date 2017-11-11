@@ -7,7 +7,7 @@ class Song(object):
 
 
 lBirthday = Song( "Happy Birthday to you..." )
-lRage = Song( "The rally around the family..." )
+lRage = Song( "The rally around the family..."  )
 
 lBirthday.singSong()
 lRage.singSong()
