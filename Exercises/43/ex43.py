@@ -1,5 +1,5 @@
 from sys import exit
-from random import radint
+from random import randint
 from textwrap import dedent
 
 class Scene( object ):
@@ -15,18 +15,18 @@ class Engine( object ):
         self.fSceneMap = aSceneMap
 
     def play( self ):
-        fCurrentScene = self.fSceneMap.openingScene()
-        fLastScene = self.fSceneMap.fNextScene( "finished" )
+        fCurrentScene = self.fSceneMap.getOpeningScene()
+        fLastScene = self.fSceneMap.getNextScene( "finished" )
 
         while fCurrentScene != fLastScene:
             fNextScene = fCurrentScene.enter()
-            fCurrentScene = self.fSceneMap.fNextScene( aNextSceneName )
+            fCurrentScene = self.fSceneMap.getNextScene( fNextScene )
 
         fCurrentScene.enter()
 
 class Death( Scene ):
 
-     fQuips = [
+    fQuips = [
         "You died.  You kinda suck at this.",
          "Your mom would be proud...if she were smarter.",
          "Such a luser.",
@@ -53,22 +53,22 @@ class CentralCorridor( Scene ):
             Armory and about to pull a weapon to blast you.
             """ ) )
 
-            lAction = input( "> " )
+        lAction = input( "> " )
 
-            if lAction == "shoot":
-                print( dedent( """
-                    Quick on the draw you yank out your blaster and fire it at the Gothon.
-                    His clown costume is flowing and moving around his body, which throws
-                    off your aim.  Your laser hits his costume but misses him entirely.  This
-                    completely ruins his brand new costume his mother bought him, which
-                    makes him fly into an insane rage and blast you repeatedly in the face until
-                    you are dead.  Then he eats you.
-                    """ ) )
+        if lAction == "shoot":
+            print( dedent( """
+                Quick on the draw you yank out your blaster and fire it at the Gothon.
+                His clown costume is flowing and moving around his body, which throws
+                off your aim.  Your laser hits his costume but misses him entirely.  This
+                completely ruins his brand new costume his mother bought him, which
+                makes him fly into an insane rage and blast you repeatedly in the face until
+                you are dead.  Then he eats you.
+                """ ) )
 
-                return 'death'
+            return 'death'
 
-            elif lAction == "dodge":
-                print( dedent( """
+        elif lAction == "dodge":
+            print( dedent( """
                     Like a world class boxer you dodge, weave, slip and slide right
                     as the Gothon's blaster cranks a laser past your head.
                     In the middle of your artful dodge your foot slips and you
@@ -77,7 +77,7 @@ class CentralCorridor( Scene ):
                     your head and eats you.
                     """ ) )
 
-                return 'death'
+            return 'death'
 
 
         elif lAction == "joke":
@@ -91,9 +91,9 @@ class CentralCorridor( Scene ):
                 """ ) )
                 return 'laser_weapon_armory'
 
-            else:
-                print( "Does not computer!" )
-                return "central_corridor"
+        else:
+            print( "Does not computer!" )
+            return "central_corridor"
 
 class LaserWearponArmory( Scene ):
 
@@ -122,10 +122,10 @@ class LaserWearponArmory( Scene ):
                 The container clicks open and the seal breaks, letting gas out.
                 You grab the neutron bomb and run as fast as you can to the
                 bridge where you must place it in the right spot.
-            """ ) )
+                """ ) )
 
             return 'the_bridge'
-        else
+        else:
             print( dedent( """
                 The lock buzzes one last time and then you hear a sickening
                 melting sound as the mechanism is fused together.
@@ -146,23 +146,22 @@ class TheBridge( Scene ):
             clown costume than the last.  They haven't pulled their
             weapons out yet, as they see the active bomb under your
             arm and don't want to set it off.
-        """ ) )
+            """ ) )
 
         lAction = input("> ")
 
-         if lAction == "throw":
-             print( dedent( """
+        if lAction == "throw":
+            print( dedent( """
                 In a panic you throw the bomb at the group of Gothons
                 and make a leap for the door.  Right as you drop it a
                 Gothon shoots you right in the back killing you.
                 As you die you see another Gothon frantically try to disarm
                 the bomb. You die knowing they will probably blow up when
                 it goes off.
-            """ ) )
-
+                """ ) )
             return 'death'
 
-        elif action == "place":
+        elif lAction == 'place':
             print( dedent( """
                 You point your blaster at the bomb under your arm
                 and the Gothons put their hands up and start to sweat.
@@ -172,7 +171,7 @@ class TheBridge( Scene ):
                 and blast the lock so the Gothons can't get out.
                 Now that the bomb is placed you run to the escape pod to
                 get off this tin can.
-            """ ) )
+                """ ) )
 
             return 'escape_pod'
 
@@ -216,7 +215,7 @@ class EscapePod( Scene ):
 
             return 'finished'
 
-class Finished( Scene )
+class Finished( Scene ):
 
     def enter( self ):
         print( "You won! Great effort." )
@@ -239,7 +238,7 @@ class Map( object ):
         return Map.fScenes.get( aSceneName )
 
     def getOpeningScene( self ):
-        return self.fNextScene( self.fStartScene )
+        return self.getNextScene( self.fStartScene )
 
 lTempMap = Map( 'central_corridor' )
 lTempGame = Engine( lTempMap )
