@@ -19,7 +19,7 @@ class Scene( object ):
 class Bridge( Scene ):
 
     def Play( self ):
-        Print( "Please enter your name" )
+        print( "Please enter your name" )
         lName = input( "> " )
         print( dedent( f"""
             Welcome aboard the USS Liberty. You mission Commander {lName},

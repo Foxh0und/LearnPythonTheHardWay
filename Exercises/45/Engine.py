@@ -12,7 +12,7 @@ class Map( object ):
         "honolulu": Honolulu(),
         "midway": Midway(),
         "success": Success(),
-        "failed": Failure(),
+        "failed": Fail(),
     }
 
     def __init__( self, aStartScene ):
