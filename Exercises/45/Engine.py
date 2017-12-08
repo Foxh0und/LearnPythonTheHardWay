@@ -7,6 +7,10 @@ class Map( object ):
         "northkorea": NorthKorea(),
         "pacificocean": PacificOcean(),
         "arctic": Arctic(),
+        "yellowsea": YellowSea(),
+        "seaofjapan": SeaOfJapan(),
+        "honolulu": Honolulu(),
+        "midway": Midway(),
         "success": Finish( True ),
         "failed": Finish( False ),
     }
@@ -27,13 +31,14 @@ class Engine( object ):
 
     def play( self ):
         fCurrentScene = self.fSceneMap.getOpeningScene()
-        fLastScene = self.fSceneMap.getNextScene( "finished" )
+        fLastScene = self.fSceneMap.getNextScene( "success" )
+
 
         while fCurrentScene != fLastScene:
             fNextScene = fCurrentScene.Play()
             fCurrentScene = self.fSceneMap.getNextScene( fNextScene )
 
-        fCurrentScene.enter()
+        fCurrentScene.Play()
 
 
 def Run():

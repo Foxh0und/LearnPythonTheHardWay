@@ -19,12 +19,15 @@ class Scene( object ):
 class Bridge( Scene ):
 
     def Play( self ):
-        print( dedent( """
-            Welcome aboard the USS Liberty. You mission Commander, should your
-            mission, should you choose to accept it, is to hunt down the North
-            Korean warship, the NK Wonsan. According to our intelligence
-            sources, the ship is carrying a nuclear ICBM, and is planning on
-            using it. You must intercept the Wonsan and stop it at all costs!
+        Print( "Please enter your name" )
+        lName = input( "> " )
+        print( dedent( f"""
+            Welcome aboard the USS Liberty. You mission Commander {lName},
+            should your mission, should you choose to accept it, is to hunt
+            down the North Korean warship, the NK Wonsan. According to our
+            intelligence sources, the ship is carrying a nuclear ICBM, and is
+            planning on using it. You must intercept the Wonsan and stop it at
+            all costs!
             """) )
 
         print( "1. Proceed towards North Korea." )
@@ -93,38 +96,86 @@ class Arctic( Scene ):
 
 class YellowSea( Scene ):
     def Play( self ):
-                print( dedent( """
-                    As you proceed into the yellow sea, an uneasy eariness
-                    comes over you and the rest of your ship. From a distance,
-                    you hear fighter jets approach.
+        print( dedent( """
+            As you proceed into the yellow sea, an uneasy eariness
+            comes over you and the rest of your ship. From a distance,
+            you hear fighter jets approach.
 
-                    Your saliors scramble to react, but are not quick enough,
-                    and the ship is sunk. Many men die onboard, and the fate of
-                    the world is left to the mercy of the Wonsan.
-                    """) )
+            Your saliors scramble to react, but are not quick enough,
+            and the ship is sunk. Many men die onboard, and the fate of
+            the world is left to the mercy of the Wonsan.
+            """) )
 
-                return "failed"
+        return "failed"
 
 class SeaOfJapan( Scene ):
     def Play( self ):
-                print( dedent( """
-                    As you proceed into the Sea of Japan, Japanese ships quickly
-                    approach and blockade your ship. You have forgotten to
-                    notify the Japanese of your movments and have broken
-                    international law!
+        print( dedent( """
+            As you proceed into the Sea of Japan, Japanese ships quickly
+            approach and blockade your ship. You have forgotten to
+            notify the Japanese of your movments and have broken
+            international law!
 
-                    Fortunately for you, the Japanese Prime Minister is very
-                    wary of North Korea, and understands the situation when
-                    presented with the facts. He directs you to keep moving with
-                    your mission, and states no ships have been found in the
-                    seas surrounding Japan and Korea.
-                    """) )
+            Fortunately for you, the Japanese Prime Minister is very
+            wary of North Korea, and understands the situation when
+            presented with the facts. He directs you to keep moving with
+            your mission, and states no ships have been found in the
+            seas surrounding Japan and Korea.
+            """ ) )
 
 
-                print( "1. Proceed back to the Pacific Ocean" )
-                print( "2. Proceed into the Arctic" )
+        print( "1. Proceed back to the Pacific Ocean" )
+        print( "2. Proceed into the Arctic" )
 
-                lOptions = { 1: "pacificocean",
-                             2: "arctic",
-                            }
-                return lOptions[super( SeaOfJapan, self).processInput( len( lOptions ) )]
+        lOptions = { 1: "pacificocean",
+                     2: "arctic",
+                    }
+        return lOptions[super( SeaOfJapan, self).processInput( len( lOptions ) )]
+
+class Honolulu( Scene ):
+
+    def Play( self ):
+        print( dedent( """
+                You pull into port at Honolulu and see that there are indeed
+                many strange looking vessels. You slink off the ship and decide
+                to have a look around.
+
+                As you wander around the docks, you walk past a crying lady, and
+                everywhere you look, people are gasping at their phones.
+
+                San Francisco has been destroyed by a Nuclear Missile!
+
+                You have failed to avert nuclear war!
+                """ ) )
+
+        return "failed"
+
+class Midway( Scene ):
+
+    def Play( self ):
+        print( dedent( """
+            As you approach Midway, the famed location of a decicive second
+            war battle, you notice that there appears to be a base setup on the
+            island.
+
+            From a safe distance, you can see that the North Korean's are ready
+            to launch missiles from their makeshift base!
+
+            Fortunately for you, the President is on the line, and he authorises
+            you too terminate the enemey with extreme prejudice. You quickly
+            scramble the two F22 Raptors on board, who bomb the enemy until there
+            is nothing left, saving the day!
+            """ ) )
+
+        return "success"
+
+class Finish( Scene ):
+
+    def __init__( self, aSuccessFlag ):
+
+        if aSuccessFlag:
+            print( "Well done, you saved the day!" )
+        else:
+            print( "Oh no, better luck next time !" )
+
+        exit( 0 )
