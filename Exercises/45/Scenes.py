@@ -169,13 +169,12 @@ class Midway( Scene ):
 
         return "success"
 
-class Finish( Scene ):
+class Success( Scene ):
+    def Play( self ):
+        print( "Well done, you saved the day!" )
+        exit( 0 )
 
-    def __init__( self, aSuccessFlag ):
-
-        if aSuccessFlag:
-            print( "Well done, you saved the day!" )
-        else:
-            print( "Oh no, better luck next time !" )
-
+class Fail( Scene ):
+    def Play( self ):
+        print( "Oh no, better luck next time !" )
         exit( 0 )

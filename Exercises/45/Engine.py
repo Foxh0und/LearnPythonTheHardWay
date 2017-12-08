@@ -11,8 +11,8 @@ class Map( object ):
         "seaofjapan": SeaOfJapan(),
         "honolulu": Honolulu(),
         "midway": Midway(),
-        "success": Finish( True ),
-        "failed": Finish( False ),
+        "success": Success(),
+        "failed": Failure(),
     }
 
     def __init__( self, aStartScene ):
