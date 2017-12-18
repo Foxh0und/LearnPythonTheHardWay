@@ -17,6 +17,15 @@ def test_room_paths():
     assert_equal( lCenter.go( 'north' ), lNorth )
     assert_equal( lCenter.go( 'south' ), lSouth )
 
-  
+def test_map():
+    lStart = Room( "Start", "You can go west and down a hole" )
+    lWest = Room( "Trees", "There are trees down here, you can go east" )
+    lDown = Room( "Dungeon", "It's dark down here, you can go up!" )
 
-        
+    lStart.addPaths( {"west": lWest, "down": lDown} )
+    lWest.addPaths( {"east": lStart} )
+    lDown.addPaths( {"up": lStart} )
+
+    assert_equal( lStart.go( "west" ), lWest )
+    assert_equal( lStart.go( "west" ).go( "east" ), lStart )
+    assert_equal( lStart.go( "down" ).go( "up" ), lStart )
