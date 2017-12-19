@@ -29,7 +29,7 @@ def test_nouns():
 
 def test_nouns():
     assert_equal( lexicon.scan( "1234" ), [( 'Number', 1234 )] )
-    lTempResult = lexicon.scan( "3 91234")
+    lTempResult = lexicon.scan( "3 91234" )
     assert_equal( lTempResult, [( 'Number', 3 ),
                                 ( 'Number', 91234 )] )
 
