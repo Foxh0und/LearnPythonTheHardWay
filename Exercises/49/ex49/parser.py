@@ -2,7 +2,7 @@ class ParserError( Exception ):
     pass
 
 class Sentence( object ):
-    def __init_( self, aSubject, aVerb, aObject ):
+    def __init__( self, aSubject, aVerb, aObject ):
         self.fSubject = aSubject[1]
         self.fVerb = aVerb[1]
         self.fObject = aObject[1]
@@ -17,8 +17,8 @@ def match( aWordList, aExpectedType ):
     if aWordList:
         lWord = aWordList.pop( 0 )
 
-        if lWord[0] = aExpectedType:
-            return word
+        if lWord[0] == aExpectedType:
+            return lWord
         else:
             return None
     else:
@@ -31,10 +31,10 @@ def skip( aWordList, aType ):
 def parseVerb( aWordList ):
     skip( aWordList, 'Stop Word' )
 
-    if peek( aWordlist ) == 'Verb':
-        return match( aWordList, 'Noun' )
+    if peek( aWordList ) == 'Verb':
+        return match( aWordList, 'Verb' )
     else:
-        raise PraserError( "Expected a noun or direction next" )
+        raise ParserError( "Expected a noun or direction next" )
 
 def parseObject( aWordList ):
     skip( aWordList, 'Stop Word' )
@@ -44,12 +44,12 @@ def parseObject( aWordList ):
     if lNextWord == 'Noun':
         return match( aWordList, 'Noun' )
     elif lNextWord == 'Direction':
-        return match( aWordList, 'Noun' )
+        return match( aWordList, 'Direction' )
     else:
         raise ParserError( "Expected a noun or direction next" )
 
 def parseSubject( aWordList ):
-    skip( wordList, 'Stop Word' )
+    skip( aWordList, 'Stop Word' )
 
     lNextWord = peek( aWordList )
 
