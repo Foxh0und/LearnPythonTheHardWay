@@ -1,7 +1,7 @@
 class ParserError( Exception ):
     pass
 
-class Sentance( object ):
+class Sentence( object ):
     def __init_( self, aSubject, aVerb, aObject ):
         self.fSubject = aSubject[1]
         self.fVerb = aVerb[1]
@@ -47,3 +47,22 @@ def parseObject( aWordList ):
         return match( aWordList, 'Noun' )
     else:
         raise ParserError( "Expected a noun or direction next" )
+
+def parseSubject( aWordList ):
+    skip( wordList, 'Stop Word' )
+
+    lNextWord = peek( aWordList )
+
+    if lNextWord == 'Noun':
+        return match( aWordList, 'Noun' )
+    elif lNextWord == 'Verb':
+        return ( 'Noun', 'player')
+    else:
+        raise ParserError( "Expected a verb next.")
+
+def parseSentence( aWordList ):
+    lSubject = parseSubject( aWordList )
+    lVerb = parseVerb( aWordList )
+    lObject = parseObject( aWordList )
+
+    return Sentence( lSubject, lVerb, lObject )
